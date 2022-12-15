@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 class ViewManage extends RecyclerView.ViewHolder {
     private TextView  movie, director, year;
 
+
     ViewManage(@NonNull View itemView) {
         super(itemView);
         movie = itemView.findViewById(R.id.movie);

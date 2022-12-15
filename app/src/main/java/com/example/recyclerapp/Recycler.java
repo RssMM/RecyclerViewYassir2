@@ -38,6 +38,14 @@ public class Recycler extends RecyclerView.Adapter<ViewManage> {
         this.notifyItemRemoved(pos);
     }
 
+    public void editFilm(Film film, int pos){
+        this.films.get(pos).setDirector(film.getDirector());
+        this.films.get(pos).setMovie(film.getMovie());
+        this.films.get(pos).setYear(film.getYear());
+        this.notifyItemChanged(pos);
+    }
+
+
     @NonNull
     @Override
     public ViewManage onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,11 +64,29 @@ public class Recycler extends RecyclerView.Adapter<ViewManage> {
         Film film = this.films.get(position);
         holder.getMovie().setText(film.getMovie());
         holder.getDirector().setText(String.valueOf(film.getDirector()));
+
         holder.getYearA().setText(String.valueOf(film.getYear()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClick.getPosition(position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return this.films.size();
+    }
+
+    OnItemClick onItemClick;
+
+    public void setOnItemClick(OnItemClick onItemClick) {
+        this.onItemClick = onItemClick;
+    }
+
+    public interface OnItemClick {
+        void getPosition(int pos); //pass any things
     }
 }

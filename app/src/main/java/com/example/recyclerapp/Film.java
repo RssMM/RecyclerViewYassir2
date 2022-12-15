@@ -1,5 +1,7 @@
 package com.example.recyclerapp;
 
+import java.util.Objects;
+
 public class Film {
     private String movie;
     private String director;
@@ -36,6 +38,19 @@ public class Film {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Film film = (Film) o;
+        return year == film.year && Objects.equals(movie, film.movie) && Objects.equals(director, film.director);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(movie, director, year);
+    }
+
+    @Override
     public String toString() {
         return "Film{" +
                 "movie='" + movie + '\'' +
@@ -43,4 +58,5 @@ public class Film {
                 ", year=" + year +
                 '}';
     }
+
 }
